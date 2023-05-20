@@ -1,4 +1,4 @@
-import "./loadEnvironment.js";
+import "../loadEnvironments.js";
 
 import cors from "cors";
 import express from "express";
