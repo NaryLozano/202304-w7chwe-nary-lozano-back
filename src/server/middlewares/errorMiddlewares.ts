@@ -1,6 +1,6 @@
 import createDebug from "debug";
 import { type NextFunction, type Request, type Response } from "express";
-import CustomError from "../types/customError";
+import CustomError from "../types/customError.js";
 
 const debug = createDebug("items-api:server:middlewares:errorMiddleware");
 
@@ -10,7 +10,7 @@ export const errorNotFound = (
   next: NextFunction
 ) => {
   debug("Error Not found");
-  const error = new CustomError(404, "Not found", "");
+  const error = new CustomError(404, "Not found", "Not Found");
   next(error);
 };
 
