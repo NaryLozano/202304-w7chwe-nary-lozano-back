@@ -1,24 +1,14 @@
 import "./loadEnvironments.js";
-import mongoose from "mongoose";
 import chalk from "chalk";
 import createDebug from "debug";
 import app from "./server/index.js";
+import connectToDataBase from "./database/models/connectToDataBase.js";
 
 const debug = createDebug("social-network-api:root");
 
 const mongoDbConnection = process.env.MONGODB_CONNECTION;
 
 const port = process.env.PORT ?? 4000;
-
-mongoose.set("debug", true);
-
-mongoose.set("toJSON", {
-  virtuals: true,
-  versionKey: false,
-  transform(doc, ret) {
-    delete ret._id;
-  },
-});
 
 if (!mongoDbConnection) {
   debug(
@@ -27,14 +17,8 @@ if (!mongoDbConnection) {
   process.exit(1);
 }
 
+await connectToDataBase(mongoDbConnection);
+
 app.listen(port, () => {
   debug(`Listening on http://localhost:${port}`);
 });
-
-try {
-  await mongoose.connect(mongoDbConnection);
-} catch (error: unknown) {
-  debug(
-    `Error connecting to database ${chalk.redBright((error as Error).message)}`
-  );
-}
