@@ -1,10 +1,10 @@
-import "./loadEnvironment.js";
+import "../loadEnvironments.js";
 
 import cors from "cors";
 import express from "express";
 import morgan from "morgan";
 
-export const app = express();
+const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
@@ -18,3 +18,5 @@ app.use(express.json());
 app.disable("x-powered-by");
 
 app.use(morgan("dev"));
+
+export default app;
