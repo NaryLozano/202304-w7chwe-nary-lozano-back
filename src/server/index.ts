@@ -6,8 +6,9 @@ import userRouter from "./routers/user/userRouters.js";
 import {
   generalErrorMiddleware,
   errorNotFound,
-} from "./middlewares/errorMiddlewares.js";
+} from "./middlewares/error/errorMiddlewares.js";
 import usersRouter from "./routers/usersRouters/usersRouters.js";
+import auth from "./middlewares/auth/authMiddlewares.js";
 
 export const app = express();
 
@@ -25,7 +26,7 @@ app.use(morgan("dev"));
 
 app.use("/user", userRouter);
 
-app.use("/users", usersRouter);
+app.use("/users", auth, usersRouter);
 
 app.use(errorNotFound);
 app.use(generalErrorMiddleware);
