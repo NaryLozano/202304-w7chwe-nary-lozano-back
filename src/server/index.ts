@@ -7,12 +7,13 @@ import {
   generalErrorMiddleware,
   errorNotFound,
 } from "./middlewares/errorMiddlewares.js";
+import usersRouter from "./routers/usersRouters/usersRouters.js";
 
 export const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://202304-w7chwe-nary-lozano-front.netlify.app",
+  process.env.ALLOWED_ORIGIN_DEV!,
+  process.env.ALLOWED_ORIGIN_PROD!,
 ];
 app.use(cors({ origin: allowedOrigins }));
 
@@ -23,6 +24,8 @@ app.disable("x-powered-by");
 app.use(morgan("dev"));
 
 app.use("/user", userRouter);
+
+app.use("/users", usersRouter);
 
 app.use(errorNotFound);
 app.use(generalErrorMiddleware);
