@@ -1,6 +1,7 @@
 import { type Request, type Response, type NextFunction } from "express";
-import CustomError from "../types/customError.js";
+import CustomError from "../../types/customError.js";
 import { errorNotFound, generalErrorMiddleware } from "./errorMiddlewares.js";
+
 type CustomResponse = Pick<Response, "status" | "json">;
 
 const response: CustomResponse = {

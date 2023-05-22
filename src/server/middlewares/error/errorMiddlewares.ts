@@ -1,6 +1,6 @@
 import createDebug from "debug";
 import { type NextFunction, type Request, type Response } from "express";
-import CustomError from "../types/customError.js";
+import CustomError from "../../types/customError.js";
 
 const debug = createDebug("items-api:server:middlewares:errorMiddleware");
 
